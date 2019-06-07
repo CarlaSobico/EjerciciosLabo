@@ -15,7 +15,10 @@ fs = 50e6
 
 #x=np.arange(N) / float(fs)
 x=np.r_[0:(10e-6+(1/fs)):1/(fs)]
-print(len(x));
+print(len(x))
+x50=np.r_[0:50:1]
+print(len(x50))
+
 #x=np.linspace(0,10e-6,M)
 
 def theta(t):
@@ -24,7 +27,32 @@ def theta(t):
 def chirp(t):
     return np.exp(1j*2*np.pi*theta(t))
 
+window = signal.tukey(50)
+window1 = signal.hann(50)
+window2 = signal.triang(50)
+plt.figure()
+plt.plot(x50,window)
+plt.title("Ventana de Tukey")
+plt.ylabel("Amplitud")
+plt.xlabel("Muestras")
+plt.grid(True)
+plt.show()
 
+plt.figure()
+plt.plot(x50,window1)
+plt.title("Ventana de Hanning")
+plt.ylabel("Amplitud")
+plt.xlabel("Muestras")
+plt.grid(True)
+plt.show()
+
+plt.figure()
+plt.plot(x50,window2)
+plt.title("Ventana triangular")
+plt.ylabel("Amplitud")
+plt.xlabel("Muestras")
+plt.grid(True)
+plt.show()
 """
 
 plt.plot(x,np.real(chirp(x)))
